@@ -5,8 +5,7 @@ using namespace std;
 
 class Chat {
 private:
-	vector <string> name_arr;
-	vector <string> pass_arr;
+	vector<pair<string, string>> user_arr = {};
 	vector <string> mes_arr;
 public:
 	void registration();

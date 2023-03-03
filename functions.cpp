@@ -1,6 +1,7 @@
 #include "chat.h"
 #include <iostream>
 #include <vector>
+#include <utility>
 using namespace std;
 
 void Chat::registration() {
@@ -10,15 +11,15 @@ void Chat::registration() {
 	cout << "Enter password" << endl;
 	cin >> y;
 	cout << "Password entered" << endl;
-	for (int i = 0; i < name_arr.size(); i++) {
-		if (x == name_arr[i]) {
+	pair<string, string> p1 = make_pair(x, y);
+	for (auto& p : user_arr) {
+		if (p1.first == p.first) {
 			cout << "error" << endl;
 			return;
 		}
 	}
 	cout << "Registration complete" << endl;
-	name_arr.emplace_back(x);
-	pass_arr.emplace_back(y);
+	user_arr.emplace_back(p1);
 }
 
 string Chat::login() {
@@ -27,17 +28,17 @@ string Chat::login() {
 	cin >> x;
 	cout << "Enter password" << endl;
 	cin >> y;
-	for (int i = 0; i < name_arr.size(); i++) {
-		if (x == name_arr[i] && y == pass_arr[i]) {
-			return name_arr[i];
+	for (auto& p : user_arr) {
+		if (x == p.first && y == p.second) {
+			return p.first;
 		}
 	}
 	cout << "error" << endl;
-	return "error";
+	return "err";
 }
 
 void Chat::authorized_user(string name) {
-	if (name == "error") {
+	if (name == "err") {
 		return;
 	}
 	cout << "Hello " << name << endl 
@@ -56,8 +57,8 @@ void Chat::authorized_user(string name) {
 		case('2'):
 			cout << "Write the name of the person to send the message to." << endl;
 			cin >> write_name;
-			for (int i = 0; i < name_arr.size(); i++) {
-				if (write_name == name_arr[i]) {
+			for (auto& p : user_arr) {
+				if (write_name == p.first) {
 					cout << "correct" << endl << "Write yout message" << endl;
 					cin >> mes;
 					string send_mes = name + " -> " + write_name + ": " + mes;
@@ -72,10 +73,12 @@ void Chat::authorized_user(string name) {
 			}
 			break;
 		case('3'):
-			for (int i = 0; i < name_arr.size(); i++) {
-				if (name == name_arr[i]) {
-					cout << mes_arr[i] << endl;
-					break;
+			for (auto& p : user_arr) {
+				if (name == p.first) {
+					for (int i = 0; i < mes_arr.size(); i++) {
+						cout << mes_arr[i] << endl;
+						break;
+					}
 				}
 			}
 			break;
