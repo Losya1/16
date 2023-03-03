@@ -1,7 +1,6 @@
 #include "chat.h"
 #include <iostream>
 #include <vector>
-#include <utility>
 using namespace std;
 
 void Chat::registration() {
@@ -64,10 +63,6 @@ void Chat::authorized_user(string name) {
 					string send_mes = name + " -> " + write_name + ": " + mes;
 					mes_arr.push_back(send_mes);
 					cout << "Message sended" << endl;
-					break;
-				}
-				else {
-					cout << "error" << endl;
 					break;
 				}
 			}
