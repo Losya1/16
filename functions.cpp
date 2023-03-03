@@ -11,14 +11,14 @@ void Chat::registration() {
 	cin >> y;
 	cout << "Password entered" << endl;
 	for (int i = 0; i < name_arr.size(); i++) {
-		if (x == name_arr[i] || y == pass_arr[i]) {
+		if (x == name_arr[i] && y == pass_arr[i]) {
 			cout << "error" << endl;
 			return;
 		}
 	}
 	cout << "Registration complete" << endl;
-	name_arr.push_back(x);
-	pass_arr.push_back(y);
+	name_arr.emplace_back(x);
+	pass_arr.emplace_back(y);
 }
 
 string Chat::login() {
